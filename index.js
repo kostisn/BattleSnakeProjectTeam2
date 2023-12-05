@@ -23,7 +23,7 @@ function info() {
   console.log("INFO");
 
 
-  // Customize snakes appearence
+  // Customize snakes appearence TASOS
   return {
     apiversion: "1",
     author: "",       // TODO: Your Battlesnake Username
@@ -72,15 +72,15 @@ function move(gameState) {
     isMoveSafe.up = false;
   }
 
-  // TODO: Step 1 - Snake must avoid collision with walls when deciding its next move
+  // TODO: Step 1 - Snake must avoid collision with walls when deciding its next move GIANNIS
 
   // boardWidth = gameState.board.width;
   // boardHeight = gameState.board.height;
 
-  // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move
+  // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move KOSTIS
   // myBody = gameState.you.body;
 
-  // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move
+  // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move ORESTIS
   // opponents = gameState.board.snakes;
 
   // Are there any safe moves left?
