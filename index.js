@@ -22,6 +22,8 @@ import runServer from './server.js';
 function info() {
   console.log("INFO");
 
+
+  // Customize snakes appearence
   return {
     apiversion: "1",
     author: "",       // TODO: Your Battlesnake Username
@@ -70,14 +72,15 @@ function move(gameState) {
     isMoveSafe.up = false;
   }
 
-  // TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
+  // TODO: Step 1 - Snake must avoid collision with walls when deciding its next move
+
   // boardWidth = gameState.board.width;
   // boardHeight = gameState.board.height;
 
-  // TODO: Step 2 - Prevent your Battlesnake from colliding with itself
+  // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move
   // myBody = gameState.you.body;
 
-  // TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
+  // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move
   // opponents = gameState.board.snakes;
 
   // Are there any safe moves left?
