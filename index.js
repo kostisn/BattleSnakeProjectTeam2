@@ -108,7 +108,25 @@ function move(gameState) {
   });
 
   // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move ORESTIS
-  // opponents = gameState.board.snakes;
+  /const snakes = gameState.board.snakes;
+  snakes.forEach((snake) => {
+    const snakeBody = snake.body;
+
+    snakeBody.forEach((b) => {
+      if (myHead.x === b.x - 1 && myHead.y === b.y) {
+        isMoveSafe.right = false;
+      }
+      if (myHead.x === b.x + 1 && myHead.y === b.y) {
+        isMoveSafe.left = false;
+      }
+      if (myHead.y === b.y - 1 && myHead.x === b.x) {
+        isMoveSafe.up = false;
+      }
+      if (myHead.y === b.y + 1 && myHead.x === b.x) {
+        isMoveSafe.down = false;
+      }
+    });
+  });
 
   // Are there any safe moves left?
   const safeMoves = Object.keys(isMoveSafe).filter(key => isMoveSafe[key]);
