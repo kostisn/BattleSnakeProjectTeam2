@@ -82,16 +82,16 @@ function move(gameState) {
 
   mybody.forEach((b) => {
     if (myHead.x === b.x - 1 && myHead.y === b.y) {
-      possibleMoves.right = false;
+      isMoveSafe.right = false;
     }
     if (myHead.x === b.x + 1 && myHead.y === b.y) {
-      possibleMoves.left = false;
+      isMoveSafe.left = false;
     }
     if (myHead.y === b.y - 1 && myHead.x === b.x) {
-      possibleMoves.up = false;
+      isMoveSafe.up = false;
     }
     if (myHead.y === b.y + 1 && myHead.x === b.x) {
-      possibleMoves.down = false;
+      isMoveSafe.down = false;
     }
   });
 
