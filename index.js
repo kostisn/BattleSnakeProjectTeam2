@@ -78,7 +78,22 @@ function move(gameState) {
   // boardHeight = gameState.board.height;
 
   // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move KOSTIS
-  // myBody = gameState.you.body;
+  myBody = gameState.you.body;
+
+  mybody.forEach((b) => {
+    if (myHead.x === b.x - 1 && myHead.y === b.y) {
+      possibleMoves.right = false;
+    }
+    if (myHead.x === b.x + 1 && myHead.y === b.y) {
+      possibleMoves.left = false;
+    }
+    if (myHead.y === b.y - 1 && myHead.x === b.x) {
+      possibleMoves.up = false;
+    }
+    if (myHead.y === b.y + 1 && myHead.x === b.x) {
+      possibleMoves.down = false;
+    }
+  });
 
   // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move ORESTIS
   // opponents = gameState.board.snakes;
