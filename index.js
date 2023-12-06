@@ -108,7 +108,7 @@ function move(gameState) {
   });
 
   // TODO: Step 3 - Snake must avoid collision with other snakes when deciding its next move ORESTIS
-  /const snakes = gameState.board.snakes;
+  const snakes = gameState.board.snakes;
   snakes.forEach((snake) => {
     const snakeBody = snake.body;
 
