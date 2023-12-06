@@ -73,10 +73,22 @@ function move(gameState) {
   }
 
   // TODO: Step 1 - Snake must avoid collision with walls when deciding its next move GIANNIS
+   const boardWidth = gameState.board.width;
+  const boardHeight = gameState.board.height;
+  if (myHead.x===0){
+    isMoveSafe.left=false;
+  }
+  if (myHead.x=== boardWidth -1 ){
+    isMoveSafe.right=false;
+  }
+  if (myHead.y===0){
+    isMoveSafe.down=false;
+  }
+  if (myHead.y=== boardHeight -1){
+    isMoveSafe.up=false;
+  }
 
-  // boardWidth = gameState.board.width;
-  // boardHeight = gameState.board.height;
-
+ 
   // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move KOSTIS
   myBody = gameState.you.body;
 
