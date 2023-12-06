@@ -92,7 +92,7 @@ function move(gameState) {
   // TODO: Step 2 - Snake must avoid collision with itself when deciding its next move KOSTIS
  const myBody = gameState.you.body;
 
-  mybody.forEach((b) => {
+  myBody.forEach((b) => {
     if (myHead.x === b.x - 1 && myHead.y === b.y) {
       isMoveSafe.right = false;
     }
