@@ -1,8 +1,4 @@
 // Welcome to
-
-
-// 1234567
-// qwer
 // __________         __    __  .__                               __
 // \______   \_____ _/  |__/  |_|  |   ____   ______ ____ _____  |  | __ ____
 //  |    |  _/\__  \\   __\   __\  | _/ __ \ /  ___//    \\__  \ |  |/ // __ \
@@ -26,10 +22,10 @@ function info() {
   // Customize snakes appearence TASOS
   return {
     apiversion: "1",
-    author: "",       // TODO: Your Battlesnake Username
-    color: "#888888", // TODO: Choose color
-    head: "default",  // TODO: Choose head
-    tail: "default",  // TODO: Choose tail
+    author: "",       
+    color: "#cc0066", // Choose color
+    head: "snow-worm",  // Choose head
+    tail: "block-bum",  // Choose tail
   };
 }
 
