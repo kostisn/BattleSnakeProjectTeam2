@@ -7,13 +7,13 @@
 //
 // This file can be a nice home for your Battlesnake logic and helper functions.
 //
-// To get you started we've included code to prevent your Battlesnake from moving backwards.
+// To get you started we've included code to prevent your Battlesnake from moving backwards.ssss
 // For more info see docs.battlesnake.com
 
 import runServer from './server.js';
 
 // info is called when you create your Battlesnake on play.battlesnake.comsdd
-// and controls your Battlesnake's appearance
+// and controls your Battlesnake's appearanceddd
 // TIP: If you open your Battlesnake URL in a browser you should see this data
 function info() {
   console.log("INFO");
