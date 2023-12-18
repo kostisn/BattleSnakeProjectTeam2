@@ -12,7 +12,7 @@
 
 import runServer from './server.js';
 
-// info is called when you create your Battlesnake on play.battlesnake.comsdd
+// info is called when you create your Battlesnake on play.battlesnake.comsdds
 // and controls your Battlesnake's appearanceddd
 // TIP: If you open your Battlesnake URL in a browser you should see this data
 function info() {
