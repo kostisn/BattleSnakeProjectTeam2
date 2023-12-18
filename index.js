@@ -12,18 +12,18 @@
 
 import runServer from './server.js';
 
-// info is called when you create your Battlesnake on play.battlesnake.com
+// info is called when you create your Battlesnake on play.battlesnake.comsdd
 // and controls your Battlesnake's appearance
 // TIP: If you open your Battlesnake URL in a browser you should see this data
 function info() {
   console.log("INFO");
 
 
-  // Customize snakes appearence TASOS
+  // Customize snakes appearence TASOSs
   return {
     apiversion: "1",
     author: "",       
-    color: "#cc0066", // Choose color
+    color: "#cc0066", // Choose colord
     head: "snow-worm",  // Choose head
     tail: "block-bum",  // Choose tail
   };
