@@ -132,9 +132,47 @@ function move(gameState) {
   // Choose a random move from the safe moves
   const nextMove = safeMoves[Math.floor(Math.random() * safeMoves.length)];
 
-  // TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-  // food = gameState.board.food;
+  // TODO: Step 4 - Move towards food instead of random, to regain health and survive longer GIANNIS
 
+  const food = gameState.board.food;
+
+  let closestFood = null;
+  let minDistance = Infinity;
+
+  food.forEach((f) => {
+    const distance = Math.abs(myHead.x - f.x) + Math.abs(myHead.y - f.y);
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestFood = f;
+    }
+  });
+
+  if (closestFood) {
+    // Determine the direction to move towards the closest food
+    const xDiff = myHead.x - closestFood.x;
+    const yDiff = myHead.y - closestFood.y;
+
+    if (xDiff > 0 && isMoveSafe.left) {
+      return { move: "left" };
+    } else if (xDiff < 0 && isMoveSafe.right) {
+      return { move: "right" };
+    } else if (yDiff > 0 && isMoveSafe.down) {
+      return { move: "down" };
+    } else if (yDiff < 0 && isMoveSafe.up) {
+      return { move: "up" };
+    }
+  }
+
+  // If no food is found or it's not safe to move towards food, choose a random safe move
+  const safeMoves1 = Object.keys(isMoveSafe).filter((key) => isMoveSafe[key]);
+  if (safeMoves.length == 0) {
+    console.log(`MOVE ${gameState.turn}: No safe moves detected! Moving down`);
+    return { move: "down" };
+  }
+
+  const nextMove1 = safeMoves[Math.floor(Math.random() * safeMoves.length)];
+  
   console.log(`MOVE ${gameState.turn}: ${nextMove}`);
   return { move: nextMove };
 }
