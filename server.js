@@ -1,11 +1,20 @@
+import ngrok from 'ngrok';
 import express from 'express';
 
-export default function runServer(handlers) {
+export default async function runServer(handlers) {
   const app = express();
   app.use(express.json());
 
   app.get("/", (req, res) => {
-    res.send(handlers.info());
+    console.log("Received GET request on /");
+    try {
+      const infoResponse = handlers.info(); ":"
+      console.log("Info response:", "\n", infoResponse);
+      res.send(infoResponse);
+    } catch (error) {
+      console.error("Error in GET /:", error);
+      res.status(500).send("Internal Server Error");
+    }
   });
 
   app.post("/start", (req, res) => {
@@ -30,7 +39,29 @@ export default function runServer(handlers) {
   const host = '0.0.0.0';
   const port = process.env.PORT || 8000;
 
-  app.listen(port, host, () => {
-    console.log(`Running Battlesnake at http://${host}:${port}...`)
+  app.listen(port, host, async () => {
+    console.log(`Running Battlesnake at http://${host}:${port}...`);
+  
+    if (process.env.NGROK_AUTHTOKEN) {
+      try {
+        await ngrok.authtoken(process.env.NGROK_AUTHTOKEN);
+        const ngrokResponse = await ngrok.connect(port);
+        
+        // Log the entire response object
+        console.log('ngrok response:', ngrokResponse);
+        console.log('Type of ngrok response:', typeof ngrokResponse);
+  
+        // If ngrokResponse is an object, log its properties
+        if (typeof ngrokResponse === 'object') {
+          Object.keys(ngrokResponse).forEach(key => {
+            console.log(key, ':', ngrokResponse[key]);
+          });
+        }
+      } catch (error) {
+        console.error(`Error establishing ngrok tunnel: ${error}`);
+      }
+    } else {
+      console.log('NGROK_AUTHTOKEN is not set. Skipping ngrok tunnel.');
+    }
   });
 }
