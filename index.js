@@ -175,6 +175,25 @@ function move(gameState) {
   
   console.log(`MOVE ${gameState.turn}: ${nextMove}`);
   return { move: nextMove };
+  // Avoid collision with other snakes' heads
+  const otherSnakes = gameState.board.snakes.filter(snake => snake.id !== gameState.you.id);
+  otherSnakes.forEach(snake => {
+    const snakeHead = snake.body[0];
+    const headDiffX = myHead.x - snakeHead.x;
+    const headDiffY = myHead.y - snakeHead.y;
+
+    if (Math.abs(headDiffX) <= 1 && Math.abs(headDiffY) <= 1) {
+      if (headDiffX > 0 && isMoveSafe.right) {
+        isMoveSafe.right = false;
+      } else if (headDiffX < 0 && isMoveSafe.left) {
+        isMoveSafe.left = false;
+      } else if (headDiffY > 0 && isMoveSafe.down) {
+        isMoveSafe.down = false;
+      } else if (headDiffY < 0 && isMoveSafe.up) {
+        isMoveSafe.up = false;
+      }
+    }
+  });
 }
 
 runServer({
