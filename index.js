@@ -22,7 +22,7 @@ function info() {
   return {
     apiversion: "1",
     author: "",       
-    color: "#cc0066", // Choose color
+    color: "#cc0061", // Choose color
     head: "snow-worm",  // Choose head
     tail: "block-bum",  // Choose tail
   };
