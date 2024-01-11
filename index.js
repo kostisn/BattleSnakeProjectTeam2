@@ -20,9 +20,10 @@ function info() {
 
   // Customize snakes appearence TASOSs
   return {
+  head :  "sd",
     apiversion: "1",
-    author: "",       
-    color: "#cc0061", // Choose color
+    author: "",         
+    color: "#cc0066", // Choose color
     head: "snow-worm",  // Choose head
     tail: "block-bum",  // Choose tail
   };
@@ -172,11 +173,30 @@ function move(gameState) {
   }
 
   const nextMove1 = safeMoves[Math.floor(Math.random() * safeMoves.length)];
+
+  otherSnakes.forEach(snake => {
+    const snakeTail = snake.body[snake.body.length - 1]; // Get the tail of the snake
+    const tailDiffX = myHead.x - snakeTail.x;
+    const tailDiffY = myHead.y - snakeTail.y;
+
+    if (Math.abs(tailDiffX) <= 1 && Math.abs(tailDiffY) <= 1) {
+      const willSnakeEatNextTurn = snake.length < gameState.you.length;
+
+      if (tailDiffX > 0 && isMoveSafe.right && !willSnakeEatNextTurn) {
+        isMoveSafe.right = false;
+      } else if (tailDiffX < 0 && isMoveSafe.left && !willSnakeEatNextTurn) {
+        isMoveSafe.left = false;
+      } else if (tailDiffY > 0 && isMoveSafe.down && !willSnakeEatNextTurn) {
+        isMoveSafe.down = false;
+      } else if (tailDiffY < 0 && isMoveSafe.up && !willSnakeEatNextTurn) {
+        isMoveSafe.up = false;
+      }
+    }
+  });
   
-  console.log(`MOVE ${gameState.turn}: ${nextMove}`);
-  return { move: nextMove };
-  // Avoid collision with other snakes' heads
+    // Avoid collision with other snakes' heads
   const otherSnakes = gameState.board.snakes.filter(snake => snake.id !== gameState.you.id);
+
   otherSnakes.forEach(snake => {
     const snakeHead = snake.body[0];
     const headDiffX = myHead.x - snakeHead.x;
@@ -194,6 +214,33 @@ function move(gameState) {
       }
     }
   });
+
+  otherSnakes.forEach(snake => {
+    const snakeHead = snake.body[0];
+    const headDiffX = myHead.x - snakeHead.x;
+    const headDiffY = myHead.y - snakeHead.y;
+
+    if (Math.abs(headDiffX) <= 1 && Math.abs(headDiffY) <= 1) {
+      const willSnakeEatNextTurn = snake.length < gameState.you.length;
+
+      // Adjusting for the bottom left point (0,0)
+      const tailX = snake.body[snake.body.length - 1].x;
+      const tailY = snake.body[snake.body.length - 1].y;
+
+      if (headDiffX > 0 && isMoveSafe.right && !willSnakeEatNextTurn && myHead.x > tailX) {
+        isMoveSafe.right = false;
+      } else if (headDiffX < 0 && isMoveSafe.left && !willSnakeEatNextTurn && myHead.x < tailX) {
+        isMoveSafe.left = false;
+      } else if (headDiffY > 0 && isMoveSafe.down && !willSnakeEatNextTurn && myHead.y > tailY) {
+        isMoveSafe.down = false;
+      } else if (headDiffY < 0 && isMoveSafe.up && !willSnakeEatNextTurn && myHead.y < tailY) {
+        isMoveSafe.up = false;
+      }
+    }
+  });
+
+  console.log(`MOVE ${gameState.turn}: ${nextMove}`);
+  return { move: nextMove };
 }
 
 runServer({
