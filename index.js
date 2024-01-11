@@ -239,6 +239,71 @@ function move(gameState) {
     }
   });
 
+  // Helper function to perform a simple flood-fill algorithm
+function floodFill(board, start) {
+  const visited = Array.from({ length: board.height }, () => Array(board.width).fill(false));
+  const queue = [{ x: start.x, y: start.y, distance: 0 }];
+
+  while (queue.length > 0) {
+    const { x, y, distance } = queue.shift();
+
+    if (x >= 0 && x < board.width && y >= 0 && y < board.height && !visited[y][x]) {
+      visited[y][x] = true;
+
+      // Use the distance information as needed (for example, store it in a data structure)
+      // In this example, I'm updating a board with the distance from the starting point
+      board[y][x] = distance;
+
+      // Add neighboring cells to the queue
+      queue.push({ x: x + 1, y, distance: distance + 1 });
+      queue.push({ x: x - 1, y, distance: distance + 1 });
+      queue.push({ x, y: y + 1, distance: distance + 1 });
+      queue.push({ x, y: y - 1, distance: distance + 1 });
+    }
+  }
+}
+
+function move(gameState) {
+  // ...
+
+  // TODO: Step 6 - Implement flood-fill algorithm
+  const boardWidth = gameState.board.width;
+  const boardHeight = gameState.board.height;
+
+  // Initialize a 2D array to represent the board, marking obstacles with -1
+  const board = Array.from({ length: boardHeight }, () => Array(boardWidth).fill(0));
+
+  // Mark obstacles (other snakes, walls) with -1
+  gameState.board.snakes.forEach(snake => {
+    snake.body.forEach(segment => {
+      board[segment.y][segment.x] = -1;
+    });
+  });
+
+  // Perform flood-fill starting from the snake's head
+  floodFill(board, myHead);
+
+  // Now you have a board with distances from the snake's head to every reachable point
+  // Use this information to make a more informed decision about the next move
+
+  // Example: Move towards the neighboring cell with the maximum distance
+  const maxDistance = Math.max(
+    board[myHead.y + 1][myHead.x],
+    board[myHead.y - 1][myHead.x],
+    board[myHead.y][myHead.x + 1],
+    board[myHead.y][myHead.x - 1]
+  );
+
+  if (maxDistance === board[myHead.y + 1][myHead.x] && isMoveSafe.down) {
+    return { move: "down" };
+  } else if (maxDistance === board[myHead.y - 1][myHead.x] && isMoveSafe.up) {
+    return { move: "up" };
+  } else if (maxDistance === board[myHead.y][myHead.x + 1] && isMoveSafe.right) {
+    return { move: "right" };
+  } else if (maxDistance === board[myHead.y][myHead.x - 1] && isMoveSafe.left) {
+    return { move: "left" };
+  }}
+
   console.log(`MOVE ${gameState.turn}: ${nextMove}`);
   return { move: nextMove };
 }
